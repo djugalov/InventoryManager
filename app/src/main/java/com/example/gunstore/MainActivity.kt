@@ -9,8 +9,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    internal lateinit var db:DBHelper
-    internal var firstGun: List<Gun> = ArrayList<Gun>()
+    private lateinit var db:DBHelper
+    private var guns: List<Gun> = ArrayList<Gun>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,8 +61,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun refreshData() {
-        firstGun = db.allGuns
-        var adapter = ListGunAdapter(this@MainActivity,firstGun, edt_id, edt_name, edt_price, edt_year)
+        guns = db.allGuns
+        var adapter = ListGunAdapter(this@MainActivity,guns, edt_id, edt_name, edt_price, edt_year)
         list_guns.adapter = adapter
     }
 }

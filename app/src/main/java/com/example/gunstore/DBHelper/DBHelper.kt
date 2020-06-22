@@ -11,7 +11,7 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null 
         private val DATABASE_VER=1
         private val DATABASE_NAME="Gunstore.db"
 
-        private val TABLE_NAME= "Gun"
+        private val TABLE_NAME_GUN= "Gun"
         private val COL_ID= "Id"
         private val COL_NAME= "Name"
         private val COL_PRICE= "Price"
@@ -19,19 +19,19 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null 
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
-        val CREATE_TABLE_QUERY = ("CREATE TABLE $TABLE_NAME($COL_ID INTEGER PRIMARY KEY, $COL_NAME TEXT,$COL_PRICE DOUBLE, $COL_YEAR INTEGER)")
+        val CREATE_TABLE_QUERY = ("CREATE TABLE $TABLE_NAME_GUN($COL_ID INTEGER PRIMARY KEY, $COL_NAME TEXT,$COL_PRICE DOUBLE, $COL_YEAR INTEGER)")
         db!!.execSQL(CREATE_TABLE_QUERY);
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, p1: Int, p2: Int) {
-        db!!.execSQL("DROP TABLE IF EXISTS $TABLE_NAME")
+        db!!.execSQL("DROP TABLE IF EXISTS $TABLE_NAME_GUN")
         onCreate(db!!)
     }
 
     val allGuns: List<Gun>
     get(){
-        val firstGuns = ArrayList<Gun>()
-        val selectQuery = "SELECT * FROM $TABLE_NAME"
+        val guns = ArrayList<Gun>()
+        val selectQuery = "SELECT * FROM $TABLE_NAME_GUN"
         val db:SQLiteDatabase = this.writableDatabase
         var cursor = db.rawQuery(selectQuery, null)
         if(cursor.moveToFirst()){
@@ -42,11 +42,11 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null 
                 gun.price = cursor.getDouble(cursor.getColumnIndex(COL_PRICE))
                 gun.year = cursor.getInt(cursor.getColumnIndex(COL_YEAR))
 
-                firstGuns.add(gun)
+                guns.add(gun)
             }while(cursor.moveToNext())
         }
         db.close();
-        return firstGuns
+        return guns
     }
 
     fun addGun(gun:Gun){
@@ -57,7 +57,7 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null 
         values.put(COL_PRICE, gun.price)
         values.put(COL_YEAR, gun.year)
 
-        db.insert(TABLE_NAME, null,values)
+        db.insert(TABLE_NAME_GUN, null,values)
         db.close()
     }
 
@@ -69,13 +69,13 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null 
         values.put(COL_PRICE, gun.price)
         values.put(COL_YEAR, gun.year)
 
-       return db.update(TABLE_NAME, null, "$COL_ID=?", arrayOf(gun.id.toString()))
+       return db.update(TABLE_NAME_GUN, null, "$COL_ID=?", arrayOf(gun.id.toString()))
     }
 
     fun deleteGun(gun: Gun){
         val db=this.writableDatabase
 
-        db.delete(TABLE_NAME,"$COL_ID=?", arrayOf(gun.id.toString()))
+        db.delete(TABLE_NAME_GUN,"$COL_ID=?", arrayOf(gun.id.toString()))
         db.close()
     }
 }
