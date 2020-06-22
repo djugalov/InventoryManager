@@ -17,13 +17,15 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null 
         private val COL_NAME= "Name"
         private val COL_PRICE= "Price"
         private val COL_YEAR= "Year"
+        private val COL_CATEGORY= "Category"
 
         private val TABLE_NAME_CATEGORY= "Category"
         private val COL_ITEMS= "Items"
+
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
-        val CREATE_TABLE_QUERY = ("CREATE TABLE $TABLE_NAME_GUN($COL_ID INTEGER PRIMARY KEY, $COL_NAME TEXT,$COL_PRICE DOUBLE, $COL_YEAR INTEGER)")
+        val CREATE_TABLE_QUERY = ("CREATE TABLE $TABLE_NAME_GUN($COL_ID INTEGER PRIMARY KEY, $COL_NAME TEXT,$COL_PRICE DOUBLE, $COL_YEAR INTEGER, $COL_CATEGORY TEXT)")
         val CREATE_TABLE_QUERY_CATEGORIES = ("CREATE TABLE $TABLE_NAME_CATEGORY($COL_ID INTEGER PRIMARY KEY, $COL_NAME TEXT,$COL_ITEMS INTEGER)")
         db!!.execSQL(CREATE_TABLE_QUERY);
         db!!.execSQL(CREATE_TABLE_QUERY_CATEGORIES);
@@ -48,6 +50,7 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null 
                 gun.name = cursor.getString(cursor.getColumnIndex(COL_NAME))
                 gun.price = cursor.getDouble(cursor.getColumnIndex(COL_PRICE))
                 gun.year = cursor.getString(cursor.getColumnIndex(COL_YEAR))
+                gun.category = cursor.getString(cursor.getColumnIndex(COL_CATEGORY))
 
                 guns.add(gun)
             }while(cursor.moveToNext())
@@ -63,6 +66,7 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null 
         values.put(COL_NAME, gun.name)
         values.put(COL_PRICE, gun.price)
         values.put(COL_YEAR, gun.year)
+        values.put(COL_CATEGORY, gun.category)
 
         db.insert(TABLE_NAME_GUN, null,values)
         db.close()
@@ -75,6 +79,7 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null 
         values.put(COL_NAME, gun.name)
         values.put(COL_PRICE, gun.price)
         values.put(COL_YEAR, gun.year)
+        values.put(COL_CATEGORY, gun.category)
 
        return db.update(TABLE_NAME_GUN, values, "$COL_ID=?", arrayOf(gun.id.toString()))
 

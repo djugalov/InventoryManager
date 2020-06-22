@@ -28,7 +28,8 @@ class MainActivity : AppCompatActivity() {
                 Integer.parseInt(edt_id.text.toString()),
                 edt_name.text.toString(),
                 edt_price.text.toString().toDouble(),
-                edt_year.text.toString()
+                edt_year.text.toString(),
+                edt_category.text.toString()
             )
 
             db.addGun(gun);
@@ -41,7 +42,8 @@ class MainActivity : AppCompatActivity() {
                 Integer.parseInt(edt_id.text.toString()),
                 edt_name.text.toString(),
                 edt_price.text.toString().toDouble(),
-                edt_year.text.toString()
+                edt_year.text.toString(),
+                edt_category.text.toString()
             )
 
             db.updateGun(gun);
@@ -54,7 +56,8 @@ class MainActivity : AppCompatActivity() {
                 Integer.parseInt(edt_id.text.toString()),
                 edt_name.text.toString(),
                 edt_price.text.toString().toDouble(),
-                edt_year.text.toString()
+                edt_year.text.toString(),
+                edt_category.text.toString()
             )
 
             db.deleteGun(gun);
@@ -65,7 +68,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun refreshData() {
         guns = db.allGuns
-        var adapter = ListGunAdapter(this@MainActivity,guns, edt_id, edt_name, edt_price, edt_year)
+        var adapter = ListGunAdapter(this@MainActivity,guns, edt_id, edt_name, edt_price, edt_year, edt_category)
         list_guns.adapter = adapter
     }
 

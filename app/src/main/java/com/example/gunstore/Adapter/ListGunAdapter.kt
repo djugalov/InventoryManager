@@ -16,7 +16,8 @@ public class ListGunAdapter(internal var activity: Activity,
                             internal var edt_id: EditText,
                             internal var edt_name: EditText,
                             internal var edt_price: EditText,
-                            internal var edt_year: EditText) : BaseAdapter() {
+                            internal var edt_year: EditText,
+                            internal var edt_category: EditText) : BaseAdapter() {
 
     internal var inflater: LayoutInflater
 
@@ -32,12 +33,14 @@ public class ListGunAdapter(internal var activity: Activity,
         rowView.txt_row_name.text = guns[index].name.toString()
         rowView.txt_row_price.text = guns[index].price.toString()
         rowView.txt_row_year.text = guns[index].year.toString()
+        rowView.txt_row_category.text =guns[index].category.toString()
 
         rowView.setOnClickListener{
             edt_id.setText(rowView.txt_row_id.text.toString())
             edt_name.setText(rowView.txt_row_name.text.toString())
             edt_price.setText(rowView.txt_row_price.text.toString())
             edt_year.setText(rowView.txt_row_year.text.toString())
+            edt_category.setText(rowView.txt_row_category.text.toString())
         }
         return rowView
     }
