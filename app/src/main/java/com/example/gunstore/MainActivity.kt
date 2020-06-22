@@ -1,11 +1,14 @@
 package com.example.gunstore
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import com.example.gunstore.Adapter.ListGunAdapter
 import com.example.gunstore.DBHelper.DBHelper
 import com.example.gunstore.Model.Gun
 import kotlinx.android.synthetic.main.activity_main.*
+import android.widget.Button as Button1
 
 class MainActivity : AppCompatActivity() {
 
@@ -64,5 +67,13 @@ class MainActivity : AppCompatActivity() {
         guns = db.allGuns
         var adapter = ListGunAdapter(this@MainActivity,guns, edt_id, edt_name, edt_price, edt_year)
         list_guns.adapter = adapter
+    }
+
+    fun navigateToSecondActivity(view: View) {
+        val btn_text = btn_navigate.text.toString()
+        if(btn_text.equals("Navigate To Category Manager")){
+            val navigator = Intent(this, SecondActivity::class.java)
+            startActivity(navigator)
+        }
     }
 }
