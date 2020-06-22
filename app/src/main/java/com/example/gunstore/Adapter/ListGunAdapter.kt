@@ -31,11 +31,13 @@ public class ListGunAdapter(internal var activity: Activity,
         rowView.txt_row_id.text = guns[index].id.toString()
         rowView.txt_row_name.text = guns[index].name.toString()
         rowView.txt_row_price.text = guns[index].price.toString()
+        rowView.txt_row_year.text = guns[index].year.toString()
 
         rowView.setOnClickListener{
             edt_id.setText(rowView.txt_row_id.text.toString())
             edt_name.setText(rowView.txt_row_name.text.toString())
             edt_price.setText(rowView.txt_row_price.text.toString())
+            edt_year.setText(rowView.txt_row_year.text.toString())
         }
         return rowView
     }

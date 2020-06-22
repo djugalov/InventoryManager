@@ -9,8 +9,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var db:DBHelper
-    private var guns: List<Gun> = ArrayList<Gun>()
+    internal lateinit var db:DBHelper
+    internal var guns: List<Gun> = ArrayList<Gun>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
                 Integer.parseInt(edt_id.text.toString()),
                 edt_name.text.toString(),
                 edt_price.text.toString().toDouble(),
-                Integer.parseInt(edt_year.text.toString())
+                edt_year.text.toString()
             )
 
             db.addGun(gun);
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
                 Integer.parseInt(edt_id.text.toString()),
                 edt_name.text.toString(),
                 edt_price.text.toString().toDouble(),
-                Integer.parseInt(edt_year.text.toString())
+                edt_year.text.toString()
             )
 
             db.updateGun(gun);
@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
                 Integer.parseInt(edt_id.text.toString()),
                 edt_name.text.toString(),
                 edt_price.text.toString().toDouble(),
-                Integer.parseInt(edt_year.text.toString())
+                edt_year.text.toString()
             )
 
             db.deleteGun(gun);

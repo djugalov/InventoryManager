@@ -15,7 +15,7 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null 
         private val COL_ID= "Id"
         private val COL_NAME= "Name"
         private val COL_PRICE= "Price"
-        private val COL_YEAR= "YEAR"
+        private val COL_YEAR= "Year"
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
@@ -40,7 +40,7 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null 
                 gun.id=cursor.getInt(cursor.getColumnIndex(COL_ID))
                 gun.name = cursor.getString(cursor.getColumnIndex(COL_NAME))
                 gun.price = cursor.getDouble(cursor.getColumnIndex(COL_PRICE))
-                gun.year = cursor.getInt(cursor.getColumnIndex(COL_YEAR))
+                gun.year = cursor.getString(cursor.getColumnIndex(COL_YEAR))
 
                 guns.add(gun)
             }while(cursor.moveToNext())
@@ -69,7 +69,8 @@ class DBHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null 
         values.put(COL_PRICE, gun.price)
         values.put(COL_YEAR, gun.year)
 
-       return db.update(TABLE_NAME_GUN, null, "$COL_ID=?", arrayOf(gun.id.toString()))
+       return db.update(TABLE_NAME_GUN, values, "$COL_ID=?", arrayOf(gun.id.toString()))
+
     }
 
     fun deleteGun(gun: Gun){
